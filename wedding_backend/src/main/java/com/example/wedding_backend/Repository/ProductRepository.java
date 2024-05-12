@@ -1,16 +1,9 @@
 package com.example.wedding_backend.Repository;
 
-
-import com.example.wedding_backend.entity.User;
-
+import com.example.wedding_backend.entity.Product;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-
-public interface UserRepository extends MongoRepository<User,Integer> {
-
-
-    User findByEmail(String email);
-
+public interface ProductRepository extends MongoRepository<Product, Integer> {
 }

@@ -32,12 +32,12 @@ public class InvoiceService {
     }
 
 
-        public void confirmOrder(int invoiceId, int orderSellerId) {
-            Invoice invoice = invoiceRepository.findById(invoiceId).get();
-            OrderSeller orderSeller = orderSellerService.findOrderSellerById(orderSellerId);
-            invoice.getOrder().add(orderSeller);
-            invoiceRepository.save(invoice);
-        }
+    public void confirmOrder(int invoiceId, int orderSellerId) {
+        Invoice invoice = invoiceRepository.findById(invoiceId).get();
+        OrderSeller orderSeller = orderSellerService.findOrderSellerById(orderSellerId);
+        invoice.getOrder().add(orderSeller);
+        invoiceRepository.save(invoice);
+    }
 
 
 

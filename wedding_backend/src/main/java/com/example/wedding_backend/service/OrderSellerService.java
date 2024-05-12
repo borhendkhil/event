@@ -37,6 +37,13 @@ public class OrderSellerService{
         return orderSellerRepository.findByClient(client);
     }
 
+    public void updateOrderSellerStatus(int id, String status){
+        OrderSeller orderSeller = orderSellerRepository.findById(id).get();
+        orderSeller.setStatus(status);
+        orderSellerRepository.save(orderSeller);
+    }
+
+
 
 
 
