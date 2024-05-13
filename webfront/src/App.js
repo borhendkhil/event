@@ -13,7 +13,7 @@ import Login from './pages/login';
 function App() {
   const [isSignedIn, setIsSignedIn] = useState(true);
   const [userName, setUserName] = useState('adam');
-  const [role, setRole] = useState('provider');
+  const [role, setRole] = useState('client');
   
 
   return (

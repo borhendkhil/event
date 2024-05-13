@@ -8,7 +8,7 @@ import bell from '../res/bellIcon.png';
 function Navbar() {
   const [isSignedIn, setIsSignedIn] = useState(true);
   const [userName, setUserName] = useState('adam');
-  const [role, setRole] = useState('provider');
+  const [role, setRole] = useState('client');
   return (
     <nav className="navbar">
       <Logo />
