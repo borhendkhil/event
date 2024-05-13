@@ -11,7 +11,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/user")
-
+@CrossOrigin
 public class UserController {
     @Autowired
     private UserService userService;
@@ -37,5 +37,6 @@ public class UserController {
     public List<User> getAllUsers(){
         return userService.getAllUsers();
     }
+    
 
 }

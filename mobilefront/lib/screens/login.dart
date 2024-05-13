@@ -1,5 +1,6 @@
 import 'dart:io';
-
+import 'package:far7etna/screens/screens.dart';
+import 'package:far7etna/service/httpservice.dart';
 import 'package:far7etna/screens/signup.dart';
 import 'package:flutter/material.dart';
 
@@ -27,9 +28,29 @@ class _loginPageState extends State<loginPage> {
   // Key _k1 = new GlobalKey();
   // Key _k2 = new GlobalKey();
   // late FocusNode myFocusNode;
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final Authservice _authService = Authservice();
 
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
+  void _login() async {
+    String email = _emailController.text.trim();
+    String password = _passwordController.text.trim();
+    Map<String, dynamic> result = await _authService.login(email, password);
+
+    if (result['success']) {
+      // Login successful, save token and navigate to next screen
+      String token = result['token'];
+      // Save token securely (e.g., using shared_preferences/flutter_secure_storage)
+      Navigator.pushReplacementNamed(context, '/home');
+    } else {
+      // Login failed, show error message
+      String message = result['message'];
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(message)),
+      );
+    }
+  }
+
   // @override
   // void initState() {
   //   super.initState();
@@ -79,37 +100,39 @@ class _loginPageState extends State<loginPage> {
                 firebaseButton(
                   context,
                   'Log in',
-                  () async {
-                    // if (_emailController.text.isEmpty ||
-                    //     _passwordController.text.isEmpty) {
-                    //   ScaffoldMessenger.of(context).showSnackBar(snack);
-                    //   return;
-                    // }
 
-                    // context
-                    //     .read<AuthenticationService>()
-                    //     .signIn(
-                    //         email: _emailController.text,
-                    //         password: _passwordController.text)
-                    //     .then((value) {
-                    //   Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (context) => const Wrapper()),
-                    //   );
-                    //   _emailController.text = "";
-                    //   _passwordController.text = "";
-                    // }).onError((error, stackTrace) {
-                    //   print("Error ${error.toString()}");
-                    //   _emailController.text = "";
-                    //   _passwordController.text = "";
-                    // });
-                  },
+                  _login,
+                  // if (_emailController.text.isEmpty ||
+                  //     _passwordController.text.isEmpty) {
+                  //   ScaffoldMessenger.of(context).showSnackBar(snack);
+                  //   return;
+                  // }
+
+                  // context
+                  //     .read<AuthenticationService>()
+                  //     .signIn(
+                  //         email: _emailController.text,
+                  //         password: _passwordController.text)
+                  //     .then((value) {
+                  //   Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //         builder: (context) => const Wrapper()),
+                  //   );
+                  //   _emailController.text = "";
+                  //   _passwordController.text = "";
+                  // }).onError((error, stackTrace) {
+                  //   print("Error ${error.toString()}");
+                  //   _emailController.text = "";
+                  //   _passwordController.text = "";
+                  // });
                 ),
                 GuestButton(
                   context,
                   'Guest',
                   () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => HomeScreen()));
                     // context
                     //     .read<AuthenticationService>()
                     //     .signInAnonymously()

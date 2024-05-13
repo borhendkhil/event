@@ -40,6 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ]),
       backgroundColor: Colors.black,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.black,
         //remove CONST modifier later when adding DB
         title: Padding(
@@ -170,18 +171,27 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     Column(
                       children: [
-                        Container(
-                          width: 56,
-                          height: 56,
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                                fit: BoxFit.cover,
-                                image: NetworkImage(
-                                  'https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8',
-                                )),
-                            //color: Colors.white,
-                            borderRadius: BorderRadius.circular(100),
+                        GestureDetector(
+                          onTap: () {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('it works'),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            width: 56,
+                            height: 56,
+                            padding: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  fit: BoxFit.cover,
+                                  image: NetworkImage(
+                                    'https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8',
+                                  )),
+                              //color: Colors.white,
+                              borderRadius: BorderRadius.circular(100),
+                            ),
                           ),
                         ),
                         const Text(

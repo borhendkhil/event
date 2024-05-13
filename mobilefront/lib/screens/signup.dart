@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../components/registerImage.dart';
 import '../components/reusableButton.dart';
 import '../components/reusableTextfield.dart';
+import 'package:far7etna/service/httpservice.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -16,6 +17,40 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _userNameTextController = TextEditingController();
   final TextEditingController _ownercodecontroller = TextEditingController();
+
+  final TextEditingController _usernameController = TextEditingController();
+
+  bool _isSeller = false;
+  final Authservice _authService = Authservice();
+
+  void _signUp() async {
+    String email = _emailController.text.trim();
+    String username = _usernameController.text.trim();
+    String password = _passwordController.text.trim();
+    UserRole role = _isSeller ? UserRole.seller : UserRole.client;
+
+    Map<String, dynamic> result = await _authService.signUp(
+      email: email,
+      username: username,
+      password: password,
+      role: role,
+    );
+
+    if (result['success']) {
+      // Registration successful, show success message
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(result['message'])),
+      );
+      // Navigate to login screen or other appropriate screen
+      Navigator.pop(context);
+    } else {
+      // Registration failed, show error message
+      String message = result['message'];
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(message)),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +84,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       height: 20,
                     ),
                     reusableTextField('Enter Username', Icons.person_outline,
-                        false, _userNameTextController),
+                        false, _usernameController),
                     const SizedBox(
                       height: 20,
                     ),
@@ -71,7 +106,8 @@ class _RegisterPageState extends State<RegisterPage> {
                     const SizedBox(
                       height: 20,
                     ),
-                    firebaseButton(context, 'Sign Up', () async {
+                    firebaseButton(
+                      context, 'Sign Up', _signUp,
                       // if (_emailController.text.isEmpty ||
                       //     _passwordController.text.isEmpty) {
                       //   ScaffoldMessenger.of(context).showSnackBar(snack);
@@ -119,7 +155,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       //     print("Error ${error.toString()}");
                       //   });
                       // }
-                    }),
+                    ),
                   ],
                 ),
               ),
