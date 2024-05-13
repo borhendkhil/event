@@ -1,7 +1,7 @@
 package com.example.wedding_backend.entity;
 
 public enum UserRole {
-    Cleint,
+    Client,
     Seller,
     Admin,
 }

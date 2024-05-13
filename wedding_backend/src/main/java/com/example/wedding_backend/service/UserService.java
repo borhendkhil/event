@@ -15,15 +15,19 @@ public class UserService {
 
     private UserRepository userRepository;
 
-    public void deleteUser(int id) {
+    public void deleteUser(String id) {
         userRepository.deleteById(id);
     }
     public void createUser(User user){
-        userRepository.save(user);
+        if (userRepository.findByEmail(user.getEmail()) != null){
+            throw new IllegalArgumentException("User with this email already exists");
+        }else {
+            userRepository.save(user);
+        }
 
 
     }
-    public User getUser(int id){
+    public User getUser(String id){
         return userRepository.findById(id).get();
     }
     public void updateUser(User user){

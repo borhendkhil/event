@@ -17,7 +17,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/delete/{id}")
-    public void deleteUser(@PathVariable int id) {
+    public void deleteUser(@PathVariable String id) {
         userService.deleteUser(id);
     }
     @PostMapping("/create")
@@ -25,7 +25,7 @@ public class UserController {
         userService.createUser(user);
     }
     @GetMapping("/get/{id}")
-    public User getUser(@PathVariable int id){
+    public User getUser(@PathVariable String id){
         return userService.getUser(id);
     }
     @PostMapping("/update")
