@@ -1,0 +1,63 @@
+.content {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.rform {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+    width: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 90vh; 
+}
+
+.rform h2 {
+    color: #8F00FF;
+    margin-bottom: 10px;
+}
+
+.rform label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.rform input, select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-bottom: 5px; 
+}
+
+button {
+    width: 100%;
+    background-color: #8F00FF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #6700b3;
+}
+
+.login {
+    text-decoration: none;
+    color: #8F00FF;
+    font-size: 14px;
+    margin-top: 10px;
+}

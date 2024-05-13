@@ -1,0 +1,46 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #071214;
+    color: white;
+    padding: 20px;
+    border-radius: 15px;
+    border-bottom: rgba(255, 255, 255, 0.308) 1px solid;
+    
+}
+
+.navbar-logo {
+    height: 60px;
+}
+
+.navbar-search {
+    flex-grow: 0.4;
+    margin: 0 20px;
+    height: 40px;
+    border-radius: 10px;
+}
+
+.navbar-user,
+.navbar-about,
+.navbar-notification {
+    margin-left: 20px;
+    right: 5px;
+}
+.navbar-notification {
+    width: 40px;
+}
+a{
+    text-decoration: none;
+    color: white;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.right{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.navbar-user{
+    color: rgb(180, 180, 180);
+}
