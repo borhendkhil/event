@@ -38,6 +38,7 @@ public class UserController {
     public List<User> getAllUsers(){
         return userService.getAllUsers();
     }
+    
 
     @PostMapping("/auth")
     public String Auth(@RequestParam String email, @RequestParam String password){
