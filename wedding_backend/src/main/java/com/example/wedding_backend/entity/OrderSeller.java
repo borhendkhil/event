@@ -19,7 +19,7 @@ public class OrderSeller {
     @Id
 
 
-    private int id;
+    private String id;
     private LocalDate dateStart;
     private LocalDate dateEnd;
 

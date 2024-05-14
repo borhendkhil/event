@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 
-public interface InvoiceRepository extends MongoRepository<Invoice, Integer> {
+public interface InvoiceRepository extends MongoRepository<Invoice, String> {
 }

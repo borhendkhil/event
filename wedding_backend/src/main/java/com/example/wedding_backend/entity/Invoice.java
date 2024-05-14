@@ -16,7 +16,7 @@ import java.util.List;
 
 public class Invoice {
     @Id
-    private int id;
+    private String id;
     private Double price;
     private List<OrderSeller> order;
 

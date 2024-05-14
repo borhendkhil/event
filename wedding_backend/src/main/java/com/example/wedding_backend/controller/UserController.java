@@ -11,6 +11,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/user")
+@CrossOrigin
 
 public class UserController {
     @Autowired
@@ -36,6 +37,11 @@ public class UserController {
     @GetMapping("/getAll")
     public List<User> getAllUsers(){
         return userService.getAllUsers();
+    }
+
+    @PostMapping("/auth")
+    public String Auth(@RequestParam String email, @RequestParam String password){
+        return userService.Auth(email, password);
     }
 
 }

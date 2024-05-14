@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 
-public interface OrderSellerRepository extends MongoRepository<OrderSeller, Integer> {
+public interface OrderSellerRepository extends MongoRepository<OrderSeller, String> {
     List<OrderSeller> findByClient(User client);
 }

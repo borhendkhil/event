@@ -10,12 +10,13 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class PoductService {
+public class ProductService {
     @Autowired
     private final ProductRepository productRepository;
 
-    public List<Product> getAllProducts() {
-        return productRepository.findAll();
+    public List<Product> getAllProductsByUser(String id) {
+        return productRepository.findProductsByUser(id);
+
     }
 
     public Product getProductById(int id) {
