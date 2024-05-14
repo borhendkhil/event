@@ -12,7 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/orderSeller")
 @RequiredArgsConstructor
-
+@CrossOrigin
 
 public class OrderSellerController {
     @Autowired
@@ -25,12 +25,12 @@ public class OrderSellerController {
     }
 
     @GetMapping("/get/{id}")
-    public OrderSeller getOrderSeller(@PathVariable int id){
+    public OrderSeller getOrderSeller(@PathVariable String id){
         return orderSellerService.findOrderSellerById(id);
     }
 
     @GetMapping("/delete/{id}")
-    public void deleteOrderSeller(@PathVariable int id){
+    public void deleteOrderSeller(@PathVariable String id){
         orderSellerService.deleteOrderSeller(id);
     }
 

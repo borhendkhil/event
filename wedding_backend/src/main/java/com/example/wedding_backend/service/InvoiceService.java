@@ -27,12 +27,12 @@ public class InvoiceService {
 
 
 
-    public void deleteInvoce(int id) {
+    public void deleteInvoce(String id) {
         invoiceRepository.deleteById(id);
     }
 
 
-    public void confirmOrder(int invoiceId, int orderSellerId) {
+    public void confirmOrder(String invoiceId, String orderSellerId) {
         Invoice invoice = invoiceRepository.findById(invoiceId).get();
         OrderSeller orderSeller = orderSellerService.findOrderSellerById(orderSellerId);
         invoice.getOrder().add(orderSeller);

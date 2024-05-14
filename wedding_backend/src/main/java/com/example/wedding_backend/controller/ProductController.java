@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/user")
+@RequestMapping("/Product")
 @CrossOrigin
 
 
@@ -24,7 +24,7 @@ public class ProductController {
         return productService.getAllProductsByUser(id);
     }
     @GetMapping("/getProduct/{id}")
-    public Product getProduct(@PathVariable int id){
+    public Product getProduct(@PathVariable String id){
         return productService.getProductById(id);
     }
     @PostMapping("/addProduct")
@@ -36,7 +36,7 @@ public class ProductController {
         return productService.updateProduct(product);
     }
     @PostMapping("/deleteProduct/{id}")
-    public void deleteProduct(@PathVariable int id){
+    public void deleteProduct(@PathVariable String id){
         productService.deleteProduct(id);
     }
 

@@ -11,6 +11,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/invoice")
+@CrossOrigin
 
 public class invoiceController {
     @Autowired
@@ -21,11 +22,11 @@ public class invoiceController {
         return invoiceService.findAllInvoce();
     }
     @DeleteMapping("/delete/{id}")
-    public void deleteInvoice(@PathVariable int id){
+    public void deleteInvoice(@PathVariable String id){
         invoiceService.deleteInvoce(id);
     }
     @PostMapping("/confirmOrder")
-    public void confirmOrder(@RequestParam int invoiceId, @RequestParam int orderSellerId){
+    public void confirmOrder(@RequestParam String invoiceId, @RequestParam String orderSellerId){
         invoiceService.confirmOrder(invoiceId, orderSellerId);
     }
 

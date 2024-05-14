@@ -18,7 +18,7 @@ public class OrderSellerService{
         return orderSellerRepository.findAll();
     }
 
-    public OrderSeller findOrderSellerById(int id){
+    public OrderSeller findOrderSellerById(String id){
         return orderSellerRepository.findById(id).get();
     }
 
@@ -26,7 +26,7 @@ public class OrderSellerService{
         orderSellerRepository.save(orderSeller);
     }
 
-    public void deleteOrderSeller(int id){
+    public void deleteOrderSeller(String  id){
         orderSellerRepository.deleteById(id);
     }
     public void updateOrderSeller(OrderSeller orderSeller){
@@ -37,7 +37,7 @@ public class OrderSellerService{
         return orderSellerRepository.findByClient(client);
     }
 
-    public void updateOrderSellerStatus(int id, String status){
+    public void updateOrderSellerStatus(String id, String status){
         OrderSeller orderSeller = orderSellerRepository.findById(id).get();
         orderSeller.setStatus(status);
         orderSellerRepository.save(orderSeller);
