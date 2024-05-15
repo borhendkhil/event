@@ -20,11 +20,12 @@ public class OrderSeller {
 
 
     private String id;
+
     private LocalDate dateStart;
     private LocalDate dateEnd;
 
-    private User client;
-    private Product product;
+    private String client;
+    private String product;
     private String status;
 
 

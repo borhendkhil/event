@@ -41,7 +41,7 @@ public class UserController {
     
 
  @PostMapping("/login")
-    public User Login (@RequestBody User user){
+    public Object Login (@RequestBody User user){
         return userService.Auth(user.getEmail(), user.getPassword());
     }
 
