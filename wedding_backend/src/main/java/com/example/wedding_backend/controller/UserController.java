@@ -40,9 +40,8 @@ public class UserController {
     }
     
 
-    @PostMapping("/auth")
-    public String Auth(@RequestParam String email, @RequestParam String password){
-        return userService.Auth(email, password);
+ @PostMapping("/login")
+    public String Login (@RequestBody User user){
+        return userService.Auth(user.getEmail(), user.getPassword());
     }
-
 }

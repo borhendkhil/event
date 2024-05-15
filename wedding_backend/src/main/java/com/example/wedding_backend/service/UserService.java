@@ -39,6 +39,7 @@ public class UserService {
 
     public String Auth(String email, String password){
         User user = userRepository.findByEmail(email);
+
         if(user == null){
             return "User with this email does not exist";
         } else if(!user.getPassword().equals(password)){
@@ -46,6 +47,7 @@ public class UserService {
         } else {
             return user.getRole().toString();
         }
+
     }
 
 
