@@ -21,28 +21,38 @@ public class UserController {
     public void deleteUser(@PathVariable String id) {
         userService.deleteUser(id);
     }
+
     @PostMapping("/create")
-    public void createUser(@RequestBody User user){
+    public User createUser(@RequestBody User user) {
         userService.createUser(user);
+        return user;
     }
+
     @GetMapping("/get/{id}")
-    public User getUser(@PathVariable String id){
+    public User getUser(@PathVariable String id) {
         return userService.getUser(id);
     }
+
     @PostMapping("/update")
-    public void updateUser(@RequestBody User user){
+    public void updateUser(@RequestBody User user) {
         userService.updateUser(user);
     }
 
     @GetMapping("/getAll")
-    public List<User> getAllUsers(){
+    public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
-    
 
- @PostMapping("/login")
-    public Object Login (@RequestBody User user){
+
+    @PostMapping("/login")
+    public Object Login(@RequestBody User user) {
         return userService.Auth(user.getEmail(), user.getPassword());
     }
 
+
+    @DeleteMapping("/deleteAll")
+    public void deleteAllUsers() {
+        userService.deleteAllUsers();
+    }
 }
+

@@ -18,12 +18,13 @@ public class UserService {
     public void deleteUser(String id) {
         userRepository.deleteById(id);
     }
-    public void createUser(User user){
+    public User createUser(User user){
         if (userRepository.findByEmail(user.getEmail()) != null){
             throw new IllegalArgumentException("User with this email already exists");
         }else {
             userRepository.save(user);
         }
+        return user;
 
 
     }
@@ -41,11 +42,14 @@ public class UserService {
         User user = userRepository.findByEmail(email);
         if(user == null){
             return "User with this email does not exist";
-        } else if(!user.getPassword().equals(password)){
+        } else if(user.getPassword().equals(password)==false){
             return "Incorrect password";
         } else {
             return user;
         }
+    }
+    public void deleteAllUsers(){
+        userRepository.deleteAll();
     }
 
 
