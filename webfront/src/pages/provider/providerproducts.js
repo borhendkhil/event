@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './provider.css';
-import Navbar from '../components/navbar';
+import Navbar from '../../components/navbar';
 
 const ProviderProducts = () => {
     const [products, setProducts] = useState([
@@ -15,7 +15,7 @@ const ProviderProducts = () => {
     return (
         <>
          <Navbar />
-        <div className="content">
+        <div className="Pcontent">
            
 
             <h2>Your Products</h2>

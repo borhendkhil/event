@@ -1,20 +1,19 @@
 
 import Navbar from './components/navbar';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import ProviderDash from './pages/providerdash';
-import ClientDash from './pages/clientdash';
-import AdminDash from './pages/admindash';
-import Register from './pages/register';
+import ProviderDash from './pages/provider/providerdash';
+import ClientDash from './pages/client/clientdash';
+import AdminDash from './pages/admin/admindash';
+import Register from './pages/login/register';
 import React, { useState } from 'react';
-import Providerproducts from './pages/providerproducts';
+import Providerproducts from './pages/provider/providerproducts';
 
 import './App.css';
-import Login from './pages/login';
+import Login from './pages/login/login';
 
 function App() {
-  const [isSignedIn, setIsSignedIn] = useState(true);
-  const [userName, setUserName] = useState('adam');
-  const [role, setRole] = useState('provider');
+
+  const [role, setRole] = useState(localStorage.getItem('userRole') || 'provider');
   
 
   return (

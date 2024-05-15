@@ -33,7 +33,7 @@
 }
 
 .rform input, select {
-    width: 100%;
+    width: 30vw;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;

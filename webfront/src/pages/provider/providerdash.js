@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "../components/navbar";
+import Navbar from "../../components/navbar";
 import "./provider.css";
 
 function ProviderDash (){
@@ -11,7 +11,7 @@ function ProviderDash (){
     return (
         <>
         <Navbar/>
-        <div className="content">
+        <div className="Pcontent">
             <h2>Confirmed Bookings</h2>
             <ul>
                 {bookings.map(booking => (
