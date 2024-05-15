@@ -6,6 +6,7 @@ import ClientDash from './pages/clientdash';
 import AdminDash from './pages/admindash';
 import Register from './pages/register';
 import React, { useState } from 'react';
+import Providerproducts from './pages/providerproducts';
 
 import './App.css';
 import Login from './pages/login';
@@ -13,7 +14,7 @@ import Login from './pages/login';
 function App() {
   const [isSignedIn, setIsSignedIn] = useState(true);
   const [userName, setUserName] = useState('adam');
-  const [role, setRole] = useState('client');
+  const [role, setRole] = useState('provider');
   
 
   return (
@@ -23,7 +24,11 @@ function App() {
       <Router>
         <Routes>
           {role === 'provider' && (
+            <>
             <Route path="/" element={<ProviderDash />} />
+            <Route path="/products" element={<Providerproducts />} />
+            </>
+          
           )}
           {role === 'client' && (
             <Route path="/" element={<ClientDash />} />

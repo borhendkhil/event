@@ -1,29 +1,72 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import "./register.css"
+import "./register.css";
 
 const Register = () => {
-    const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('');
-    const [accountCategory, setAccountCategory] = useState('');
-    const [businessCategory, setBusinessCategory] = useState('');
+    const [formData, setFormData] = useState({
+        username: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+        phoneNumber: '',
+        accountCategory: '',
+        businessCategory: ''
+    });
+    const [error, setError] = useState('');
+    const [apiMessage, setApiMessage] = useState('');
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value
+        });
+
+        if (name === 'accountCategory' && value !== 'Seller') {
+            setFormData((prevData) => ({ ...prevData, businessCategory: '' }));
+        }
+    };
+
+    const validateForm = () => {
+        const { username, email, password, confirmPassword, phoneNumber, accountCategory, businessCategory } = formData;
+
+        if (!username || !email || !password || !confirmPassword || !phoneNumber || !accountCategory) {
+            return 'Please fill in all fields';
+        }
+
+        if (password !== confirmPassword) {
+            return 'Passwords do not match';
+        }
+
+        if (accountCategory === 'Seller' && !businessCategory) {
+            return 'Please select a business category';
+        }
+
+        return null;
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Add your registration logic here
-        const userData = {
-            "name": username,
-            "email": email,
-            "password": password,     
-            "role": businessCategory,   
-            "phone": "",
-            "userRole": accountCategory,
+        setError('');
+        setApiMessage('');
+        
+        const validationError = validateForm();
+        if (validationError) {
+            setError(validationError);
+            return;
+        }
 
+        const { username, email, password, phoneNumber, accountCategory, businessCategory } = formData;
+
+        const userData = {
+            name: username,
+            email: email,
+            password: password,
+            phone: phoneNumber,
+            userRole: accountCategory,
+            role: accountCategory === 'Seller' ? businessCategory : 'Client'
         };
-        // Send the data to the backend using the specified URI
+
         fetch('http://localhost:8080/user/create', {
             method: 'POST',
             headers: {
@@ -31,35 +74,38 @@ const Register = () => {
             },
             body: JSON.stringify(userData)
         })
-        .then(response => response.json())
+        .then(async (response) => {
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(errorText || 'Something went wrong');
+            }
+            return response.json().catch(() => ({})); // Ensure empty JSON object on parse error
+        })
         .then(data => {
-            // Handle the response from the backend
-            console.log(data);
+            setApiMessage(data.message || 'Registration successful!');
         })
         .catch(error => {
-            // Handle any errors
+            setError(error.message || 'An error occurred. Please try again.');
             console.error(error);
         });
     };
 
-    const handleAccountCategoryChange = (e) => {
-        setAccountCategory(e.target.value);
-        if (e.target.value === 'Business') {
-            setBusinessCategory('');
-        }
-    };
+    const { username, email, password, confirmPassword, phoneNumber, accountCategory, businessCategory } = formData;
 
     return (
-        <div className='content'>
-            <div className='rform'>
+        <div className="content">
+            <div className="rform">
                 <h2>Register</h2>
+                {error && <p className="error">{error}</p>}
+                {apiMessage && <p className="message">{apiMessage}</p>}
                 <form onSubmit={handleSubmit}>
                     <label>
                         Username:
                         <input
                             type="text"
+                            name="username"
                             value={username}
-                            onChange={(e) => setUsername(e.target.value)}
+                            onChange={handleChange}
                         />
                     </label>
                     <br />
@@ -67,8 +113,9 @@ const Register = () => {
                         Email:
                         <input
                             type="email"
+                            name="email"
                             value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            onChange={handleChange}
                         />
                     </label>
                     <br />
@@ -76,8 +123,9 @@ const Register = () => {
                         Password:
                         <input
                             type="password"
+                            name="password"
                             value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                            onChange={handleChange}
                         />
                     </label>
                     <br />
@@ -85,8 +133,9 @@ const Register = () => {
                         Confirm Password:
                         <input
                             type="password"
+                            name="confirmPassword"
                             value={confirmPassword}
-                            onChange={(e) => setConfirmPassword(e.target.value)}
+                            onChange={handleChange}
                         />
                     </label>
                     <br />
@@ -94,18 +143,20 @@ const Register = () => {
                         Phone Number:
                         <input
                             type="tel"
+                            name="phoneNumber"
                             value={phoneNumber}
-                            onChange={(e) => setPhoneNumber(e.target.value)}
+                            onChange={handleChange}
                         />
                     </label>
                     <br />
                     <label>
                         Account Category:
                         <select
+                            name="accountCategory"
                             value={accountCategory}
-                            onChange={handleAccountCategoryChange}
+                            onChange={handleChange}
                         >
-                           
+                            <option value="">Select Category</option>
                             <option value="Client">Client</option>
                             <option value="Seller">Business</option>
                         </select>
@@ -115,10 +166,11 @@ const Register = () => {
                         <label>
                             Business Category:
                             <select
+                                name="businessCategory"
                                 value={businessCategory}
-                                onChange={(e) => setBusinessCategory(e.target.value)}
+                                onChange={handleChange}
                             >
-                                <option value="">Seller</option>
+                                <option value="">Select Business Category</option>
                                 <option value="Photographer">Photographer</option>
                                 <option value="WeddingHall">Wedding Hall</option>
                                 <option value="MakeupArtist">Makeup Artist</option>
