@@ -37,15 +37,17 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public String Auth(String email, String password){
+    public User Auth(String email, String password){
         User user = userRepository.findByEmail(email);
+        String pass = user.getPassword();
 
         if(user == null){
-            return "User with this email does not exist";
-        } else if(!user.getPassword().equals(password)){
-            return "Incorrect password";
+            return null;
+        } else if(pass.equals(password) == false){
+
+            return null;
         } else {
-            return user.getRole().toString();
+            return user;
         }
 
     }
