@@ -17,12 +17,18 @@ function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+
+        console.log('Email:', email);
+        console.log('Password', password);
         const response = await fetch('http://localhost:8080/user/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ email, password })
+            body: JSON.stringify({ 
+                "email": email, 
+                "password": password
+            })
         });
 
         const data = await response.json();

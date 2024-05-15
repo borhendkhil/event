@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import logo from '../res/logo.png';
 import './navbar.css';
 import bell from '../res/bellIcon.png';
+import { Link } from 'react-router-dom';
 
 
 
@@ -28,9 +29,9 @@ function Navbar() {
           {role === 'provider' && (
             <>
            
-              <a>Dashboard</a>
+              <Link to="/">Dashboard</Link>
               <a>Requests</a>
-              <a>Products</a>
+              <Link to="/products">Products</Link>
             </>
           )}
           {role === 'client' && (

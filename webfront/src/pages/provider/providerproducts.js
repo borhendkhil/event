@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './provider.css';
 import Navbar from '../../components/navbar';
+import { Link } from 'react-router-dom';
 
 const ProviderProducts = () => {
     const [products, setProducts] = useState([
@@ -33,6 +34,7 @@ const ProviderProducts = () => {
                         </div>
                     </li>
                 ))}
+                <Link to="/addproduct">Add Product</Link>
             </ul>
         </div>
         </>

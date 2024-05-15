@@ -7,6 +7,7 @@ import AdminDash from './pages/admin/admindash';
 import Register from './pages/login/register';
 import React, { useState } from 'react';
 import Providerproducts from './pages/provider/providerproducts';
+import AddProduct from './pages/provider/addproducts';
 
 import './App.css';
 import Login from './pages/login/login';
@@ -26,6 +27,7 @@ function App() {
             <>
             <Route path="/" element={<ProviderDash />} />
             <Route path="/products" element={<Providerproducts />} />
+            <Route path="/addproduct" element={<AddProduct />} />
             </>
           
           )}
