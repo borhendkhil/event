@@ -44,4 +44,5 @@ public class UserController {
     public User Login (@RequestBody User user){
         return userService.Auth(user.getEmail(), user.getPassword());
     }
+
 }

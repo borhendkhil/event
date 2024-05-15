@@ -27,8 +27,17 @@ public class ProductService {
         return productRepository.save(product);
     }
 
-    public Product updateProduct(Product product) {
-        return productRepository.save(product);
+    public Product updateProduct(Product product, String id) {
+        Product product1 = productRepository.findById(id).orElse(null);
+        if (product1 != null) {
+            product1.setName(product.getName());
+            product1.setDescription(product.getDescription());
+            product1.setPrice(product.getPrice());
+            product1.setImage(product.getImage());
+            product1.setUser(product.getUser());
+            return productRepository.save(product1);
+        }
+        return null;
     }
 
     public void deleteProduct(String id) {
