@@ -24,6 +24,10 @@ public class ProductController {
         return productService.getAllProductsByUser(id);
     }
 
+    @GetMapping("/getAll")
+    public List<Product> getAllProducts(){
+        return productService.getAllProducts();
+    }
 
     @GetMapping("/getProduct/{id}")
     public Product getProduct(@PathVariable String id){
